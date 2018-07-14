@@ -1,0 +1,15 @@
+{% extends 'layout.html' %} {% block body %}
+<div class="container">
+    <form class="form-horizontal" action="/success" method="POST">
+        <div class="form-group">
+            <input id="input_form" class="form-control" type="text" min="3" max="60" name="user_review" placeholder="Your Feedback" required>
+            <br>
+            <button id="button_form" type="submit" class="btn btn-success btn-lg">Submit</button>
+        </div>
+    </form>
+</div>
+<footer>
+    <center>&copy;2018 TryGuys</center>
+
+</footer>
+{% endblock %}
