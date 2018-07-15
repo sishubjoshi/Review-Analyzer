@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 import pickle
 import os
 import numpy as np
-from vectorizer import vect
+from vectorizer import vect, dataprocessing
 
 app = Flask(__name__)
 
@@ -13,7 +13,9 @@ clf = pickle.load(open(os.path.join(cur_dir,
 
 def classify(text):
     label = {0: 'negative', 1: 'positive'}
-    X=vect.transform([text])
+    print('-'*10,text,sep='\n')
+    clr = dataprocessing(text)
+    X=vect.transform(clr)
     y = clf.predict(X)[0]
     return label[y]
 

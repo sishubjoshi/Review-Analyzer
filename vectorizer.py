@@ -5,14 +5,18 @@ import os
 import pickle
 CUR_DIR = os.path.dirname(__file__)
 stop_words = pickle.load(open(os.path.join(CUR_DIR,'pickles','stopwords.pickle'),'rb'))
+train = pickle.load(open(os.path.join(CUR_DIR,'pickles','vocab.pickle'),'rb'))
+
 ss=SnowballStemmer('english')
 def dataprocessing(text):
     sent = text.lower()
     words = word_tokenize(sent)
     clrwds = [ss.stem(word) for word in words if not word in stop_words]
     rt = " ".join(clrwds)
-    return(rt)
+    print(clrwds)
+    return(clrwds)
 
-vect = TfidfVectorizer(ngram_range= (1,2), tokenizer=dataprocessing)
+vect = TfidfVectorizer(ngram_range= (1,2))
+x_vect = vect.fit_transform(train)
+print('output',vect.transform(['good']),'finished',x_vect.shape)
 
-print(vect.transform(['this was a good movie']))
