@@ -12,7 +12,7 @@ clf = pickle.load(open(os.path.join(cur_dir,
                  'classifier.pickle'), 'rb'))
 
 def classify(text):
-    label = {0: 'negative', 1: 'positive'}
+    label = {0: 'Negative', 1: 'Positive'}
     print('-'*10,text,sep='\n')
     clr = dataprocessing(text)
     X=vect.transform(clr)

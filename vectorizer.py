@@ -12,7 +12,7 @@ def dataprocessing(text):
     sent = text.lower()
     words = word_tokenize(sent)
     clrwds = [ss.stem(word) for word in words if not word in stop_words]
-    rt = " ".join(clrwds)
+    # rt = " ".join(clrwds)
     print(clrwds)
     return(clrwds)
 

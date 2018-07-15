@@ -1,5 +1,29 @@
 {% extends 'layout.html' %} {% block body %}
 
-<h1>{{ val }}</h1>
+<div class="container">
+    <div id="wrapper" class="jumbotron">
+        <h2>The Review was {{ val }}</h2>
+        <a href="/" role="button" class="btn btn-outline-success">Retry</a>
+    </div>
+</div>
+<style>
+    .container {
+        margin-top: 100px;
+    }
+    
+    h2 {
+        text-align: center;
+        color: aqua;
+    }
+    
+    #wrapper {
+        background: #ffffff;
+    }
+    
+    a {
+        margin-left: 45%;
+    }
+</style>
+
 
 {% endblock %}
