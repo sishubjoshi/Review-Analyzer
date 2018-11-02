@@ -1,35 +1,29 @@
-from flask import Flask, render_template, request
-import pickle
-import os
-import numpy as np
-from vectorizer import vect, dataprocessing
+from flask import Flask, render_template, request, jsonify
+import classifier as clf
 
 app = Flask(__name__)
 
-cur_dir = os.path.dirname(__file__)
-clf = pickle.load(open(os.path.join(cur_dir,
-                 'pickles',
-                 'classifier.pickle'), 'rb'))
 
-def classify(text):
-    label = {0: 'Negative', 1: 'Positive'}
-    print('-'*10,text,sep='\n')
-    clr = dataprocessing(text)
-    X=vect.transform(clr)
-    y = clf.predict(X)[0]
-    return label[y]
 
-@app.route('/')
-def index():
-    return render_template('index.html')
 
-@app.route('/success',methods=['POST'])
-def success():
-    if request.method == 'POST':
+
+# @app.route('/')
+# def index():
+#     return render_template('index.html')
+
+# @app.route('/success',methods=['POST'])
+# def success():
+#     if request.method == 'POST':
         
-        review = request.form['user_review']
-        Y = classify(review)
-        return render_template('success.html',val=Y)
+#         review = request.form['user_review']
+#         Y = clf.classify(review)
+#         return render_template('success.html',val=Y)
+
+@app.route('/review', methods=['POST'])
+def review():
+        text = request.get_json()
+        Y = clf.classify(text['review'])
+        return jsonify({'message': Y})
 
 
 if __name__ == '__main__':
